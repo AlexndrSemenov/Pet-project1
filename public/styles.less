@@ -1,0 +1,137 @@
+.background {
+  background-color: #282c34;
+}
+
+.main__text {
+  margin-top: 75px;
+}
+
+.main__input {
+  width: 50%;
+  border-radius: 3px;
+}
+
+.main__header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  .background();
+}
+
+.popup {
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.5s;
+}
+
+.popup_opened {
+  display: flex;
+  visibility: visible;
+  opacity: 1;
+  transition: all 0.5s;
+}
+
+.popup__close-button {
+  cursor: pointer;
+  position: absolute;
+  right: -40px;
+  top: -40px;
+  border: none;
+  height: 32px;
+  width: 32px;
+  background: none;
+  background-image: url(./closeicon.svg);
+  background-size: 100%;
+  @media screen and (max-width: 550px) {
+    right: 0;
+    top: -36px;
+    height: 26px;
+    width: 26px;
+  }
+  @media screen and (max-width: 320px) {
+    height: 20px;
+    width: 20px;
+  }
+  &:hover {
+    opacity: 0.6;
+    transition: 0.3s;
+  }
+}
+
+.popup__container_delete {
+  width: 430px;
+  max-height: 181px;
+  padding: 34px 36px;
+}
+
+.popup__container {
+  position: relative;
+  border-radius: 10px;
+  background-color: #fff;
+  max-width: 430px;
+  padding: 34px 36px 37px 36px;
+  box-sizing: border-box;
+  margin: 0 auto;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.15);
+  @media screen and (max-width: 550px) {
+    padding: 25px 22px;
+    max-width: 350px;
+    min-height: 322px;
+  }
+  @media screen and (max-width: 450px) {
+    max-width: calc(100% - 19px * 2);
+  }
+  @media screen and (max-width: 320px) {
+    max-width: 282px;
+  }
+}
+
+.popup__btn-submit {
+  margin-top: 43px;
+  width: 100%;
+  height: 50px;
+  background: #000;
+  color:#fff;
+  border-radius: 2px;
+  cursor: pointer;
+  border: none;
+  font-size: 18px;
+  line-height: 21.78px;
+  font-weight: 400;
+  box-shadow: 0px 4px 4px 0px #00000040;
+  @media screen and (max-width: 320px) {
+    margin-top: 22px;
+    font-size: 14px;
+    line-height: 16.94px;
+  }
+  &:hover {
+    opacity: 0.8;
+    transition: 0.3s;
+  }
+}
+
+.photo-grid__image {
+  height: 282px;
+  object-fit: cover;
+  width: 100%;
+}
+
+.body__header-button {
+  height: 30px;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  .background();
+}

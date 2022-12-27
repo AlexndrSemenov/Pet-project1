@@ -1,65 +1,54 @@
-import './App.css';
 import { useState } from "react";
-import { saveAs } from 'file-saver';
-
+import ImagePopup from './ImagePopup';
+import { useDispatch } from "react-redux";
+import * as actions from "./store/actions";
 
 function App() {
 
-  //стейт-переменная с данными пользователя
-  const [data, setData] = useState('');
+  //получаем диспатч из хука
+  const dispatch = useDispatch();
+
+  //стейт-переменная с ссылкой на картинку пользователя
+  const [url, setUrl] = useState('');
+  //стейт-переменная определяющая видимость попапа
+  const [isImagePopupOpen, setIsImagePopupOpen] = useState(false);
+
+  const handleEditAvatarClick = () => {
+    dispatch(actions.addTodo(url)); 
+    setIsImagePopupOpen(true);
+  }
   
+  const closeAllPopup = () => {
+    //скрываем попапы
+    setIsImagePopupOpen(false);
+  }
+
   //задаем данные
-  function handleChangeData(e) {
+  function handleChangeUrl(e) {
     const value = e.target.value;
-    setData(value);
-  };
-
-  //сохраняем страницу
-  function savePage() {
-    saveAs(
-      new Blob(
-          [(new XMLSerializer).serializeToString(document)]
-        , {type: "application/xhtml+xml;charset=" + document.characterSet}
-    )
-    , "document.xhtml"
-    );
-    setData('');
-  };
-
-  //открываем данные пользователя в новом окне
-  function createNewDocument() {
-    var newWindow = window.open('', '', 'width=400,height=500');
-    newWindow.document.open();
-    newWindow.document.write('<!doctype html>');
-    newWindow.document.write('<html lang="ru">');
-    newWindow.document.write('<head>');
-    newWindow.document.write('<meta charset="utf-8">');
-    newWindow.document.write('<meta name="viewport" content="width=device-width, initial-scale=1">');
-    newWindow.document.write('<title>Новая страница</title>');
-    newWindow.document.write('</head>');
-    newWindow.document.write('<body>');
-    newWindow.document.write('<h1>Сформированные данные:</h1>');
-    newWindow.document.write(data);
-    newWindow.document.write('</' + 'body>');
-    newWindow.document.write('</html>');
+    setUrl(value);
   };
   
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Тестовая задача</h1>
+
+    <main>
+      
+      <header className="main__header">
+        <h1>Приложение для просмотра изображений</h1>
       </header>
+
       <section>
-        <p className="text">Вставьте необходимые для сохранения данные:</p>
-        <input placeholder='Данные' value={data} onChange={handleChangeData} />
-        
-        <p className="text">Чтобы сохранить страницу в формате XHTML нажмите:</p>
-        <button onClick={savePage}>Сохранить</button>
-        
-        <p className="text">Чтобы сформировать и открыть новый документ нажмите:</p>
-        <button onClick={createNewDocument}>Открыть</button>
+        <p>(тест Redux и less)</p>
+        <p className="main__text">Вставьте ссылку на изображение</p>
+        <input placeholder='Ваша ссылка' value={url} onChange={handleChangeUrl} className="main__input"/>
+        <p className="main__text">Для просмотра изображения нажмите</p>
+        <button onClick={handleEditAvatarClick}  className="body__header-button">Открыть</button>
       </section>
-    </div>
+      
+      <ImagePopup isOpen={isImagePopupOpen} onClose={closeAllPopup} />
+
+    </main>
+
   );
 };
 
